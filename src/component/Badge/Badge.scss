@@ -1,0 +1,48 @@
+.cr {
+    display:inline-block;
+    width:10px;
+    height:10px;
+    position: relative;
+    left:15%;
+    border-radius: 30px;      
+    cursor:pointer;
+    border:2px solid transparent;
+    
+    
+    &--green {
+    background-color: green;
+    }
+
+    &--grey {
+      background-color: grey;
+    }
+
+     &--purple {
+       background-color: purple;
+      }
+
+    &--red { 
+      background-color: red;
+    }
+    
+    &--yellow { 
+      background-color: pink;
+    }
+
+    &--black { 
+      background-color: black;
+    }
+
+    &--blue { 
+      background-color: blue;
+    }
+
+    &--lime { 
+      background-color: lime;
+    }
+  
+  }
+
+.activecolor {
+  border:2px solid black;
+}
