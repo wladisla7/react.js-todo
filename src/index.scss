@@ -13,7 +13,6 @@ body {
 }
 
 .todo {
-  font-size: 14px;
   position: absolute;
   left:50%;
   top:50%;
@@ -29,7 +28,35 @@ body {
   border-right: 1px solid black;
   padding: 60px 30px;
 }
- 
+
+.field {
+  background-color: #FFFFFF;
+  border: 1px solid #bdb5b5;
+  box-sizing:border-box;
+  border-radius: 4px;
+  padding: 10px;
+  margin:10px;
+  width:90%
+}
+
+.AddBtn {
+  background-color: #4dd599;
+  border-radius: 4px;
+  color:#fff;
+  border:0;
+  padding:10px 20px;
+  cursor: pointer;
+  width:90%;
+  margin:10px;
+}
+
+.AddBtn:hover {
+  background-color: darken(#4dd599, 10%);
+}
+
+.AddBtn:active {
+  background-color: darken(#4dd599,20%);
+}
  
 
 
