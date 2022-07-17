@@ -1,14 +1,21 @@
+import React, { useState } from 'react';
+import List from './component/List';
+import AddListButton from './component/AddList/AddButtonList.jsx';
+import DB from './assets/db.json';
+import listPic from './assets/img/list.png';
 import './App.scss';
-import List from './component/List'
-import AddListButton from './component/AddList/AddButtonList.jsx'
-import DB from './assets/db.json'
-import listPic from './assets/img/list.png'
- 
+
 
 
 
 
 function App() {
+  const [lists, setLists] = useState(
+    DB.lists.map(item => {
+      item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
+      return item;
+    })
+  );
   return (
     <div className="todo">
       <div className="todoSidebar">
@@ -20,29 +27,12 @@ function App() {
               // active: true
             }
           ]}
-          isDeleted
+
         />
         <List
-          items={[
-            {
-              color: 'green',
-              name: 'Покупки',
-              active: true
-
-            },
-            {
-              color: 'red',
-              name: 'Фронтенд',
-
-            },
-            {
-              color: 'yellow',
-              name: 'Фильмы и сериалы'
-            }
-          ]}
-          isDeleted
-        />
-        <AddListButton colors={DB.colors}/>
+          items={lists}
+          isDeleted />
+        <AddListButton colors={DB.colors} />
       </div>
       <div className="todoTasks"></div>
     </div>
@@ -51,3 +41,4 @@ function App() {
 
 
 export default App;
+
