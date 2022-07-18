@@ -1,0 +1,60 @@
+.task {
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 39px;
+    color:#64d4ed;
+    margin-bottom:20px;
+    padding-bottom:20px;
+    border-bottom: 1px solid black ;
+  }
+  
+  
+  .checkbox{
+
+    display: flex;
+    align-items: center;
+
+    p {
+        margin-left: 15px;
+    }
+      
+    label{
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        border-radius:30px;
+        border:2px solid #e8e8e8;
+        width:20px;
+        height:20px;
+        display: inline-block;
+     
+    }
+
+    .checkpic {
+        position:relative;
+        opacity: 1;
+        left:5px;
+    }
+
+    input{
+        display:none;
+    }
+
+    input:checked + label {
+        background-color:#4dd599;
+        border-color:#4dd599
+    }
+
+    &:hover{
+        label{
+            background-color: #f2f2f2;
+            border-color:#f2f2f2;
+            img{
+                opacity:1
+            }
+        }
+    }
+}
+  
+  
+ 
