@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import List from './component/List';
 import AddListButton from './component/AddList/AddButtonList.jsx';
+import Tasks from './component/Tasks';
 import DB from './assets/db.json';
 import listPic from './assets/img/list.png';
 import './App.scss';
@@ -16,6 +17,15 @@ function App() {
       return item;
     })
   );
+
+  const onAddList = (obj) => {
+    const newList = [
+      ...lists,
+      obj
+    ];
+    setLists(newList);
+  };
+
   return (
     <div className="todo">
       <div className="todoSidebar">
@@ -31,10 +41,16 @@ function App() {
         />
         <List
           items={lists}
-          isDeleted />
-        <AddListButton colors={DB.colors} />
+          onRemove={(lists) => {
+            alert(1)
+            console.log(lists)
+          }
+          }
+          isDeleted
+        />
+        <AddListButton onAdd={onAddList} colors={DB.colors} />
       </div>
-      <div className="todoTasks"></div>
+      <Tasks />
     </div>
   );
 }
