@@ -13,6 +13,7 @@ body {
 }
 
 .todo {
+  display: flex;
   position: absolute;
   left:50%;
   top:50%;
@@ -28,6 +29,13 @@ body {
   border-right: 1px solid black;
   padding: 60px 30px;
 }
+
+.todo > .todoTasks {
+  flex:1;
+  padding:60px;
+}
+
+ 
 
 .field {
   background-color: #FFFFFF;
