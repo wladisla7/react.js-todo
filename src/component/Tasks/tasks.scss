@@ -27,7 +27,8 @@
         width:20px;
         height:20px;
         display: inline-block;
-     
+        cursor: pointer;
+        transition:  background 0.15s ease-in-out;          
     }
 
     .checkpic {
