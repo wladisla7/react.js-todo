@@ -1,10 +1,19 @@
 import React from 'react';
 import classNames from 'classnames';
-import Badge from '../Badge/index'
+import Badge from '../Badge/index';
+import './list.scss';
+import deletePic from '../../assets/img/delete.png'
 import './list.scss';
 
 
-const List = ({ items, isDeleted, onClick }) => {
+const List = ({ items, isDeleted, onClick, onRemove }) => {
+
+    const deleteList = (item) => {
+        if (window.confirm('Вы действительно хотите удалить?')){
+            onRemove(item);
+        }
+    }
+
     return (
         <ul onClick={onClick} className="todoList" >
             {items.map((item, id) => (
@@ -17,6 +26,14 @@ const List = ({ items, isDeleted, onClick }) => {
                         )}
                     </div>
                     <span>{item.name}</span>
+                    {isDeleted && (
+                        <img
+                            src={deletePic}
+                            alt="Delete pic"
+                            className="deletePic"
+                            onClick={() => deleteList(item)}
+                        />
+                    )}
                 </li>
 
             ))}
