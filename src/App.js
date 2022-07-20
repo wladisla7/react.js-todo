@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
-import List from './component/List';
-import AddListButton from './component/AddList/AddButtonList.jsx';
-import Tasks from './component/Tasks';
-import DB from './assets/db.json';
-import listPic from './assets/img/list.png';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { List, AddList, Tasks } from './component';
 import './App.scss';
-
-
+import listPic from './assets/img/list.png'
 
 
 
 function App() {
-  const [lists, setLists] = useState(
-    DB.lists.map(item => {
-      item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
-      return item;
-    })
-  );
+  const [lists, setLists] = useState(null);
+  const [colors, setColor] = useState(null);
+
+
+  useEffect(() => {
+
+    axios.get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({ data }) => {
+      setLists(data);
+    });
+
+    axios.get('http://localhost:3001/colors').then(({ data }) => {
+      setColor(data);
+    });
+  }, []);
 
   const onAddList = (obj) => {
     const newList = [
@@ -39,18 +43,21 @@ function App() {
           ]}
 
         />
-        <List
-          items={lists}
-          onRemove={(lists) => {
-            alert(1)
-            console.log(lists)
-          }
-          }
-          isDeleted
-        />
-        <AddListButton onAdd={onAddList} colors={DB.colors} />
+        {lists ? (
+          <List
+            items={lists}
+            onRemove={id => {
+              const newLists = lists.filter(item => item.id !== id)
+              setLists(newLists);
+            }}
+            isDeleted
+          />
+        ) : (
+          'Загрузка'
+        )}
+        <AddList onAdd={onAddList} colors={colors} />
       </div>
-      <Tasks />
+      {lists && <Tasks listItem={lists[1]} />}
     </div>
   );
 }
