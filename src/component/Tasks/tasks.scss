@@ -9,6 +9,16 @@
 
 }
 
+.taskIcon {
+    cursor: pointer;
+}
+
+ 
+
+.taskIcon > img {
+    margin-left: 10px;
+}
+
 .taskItem > h3 {
     font-weight: bold;
     font-size: 24px;
