@@ -42,6 +42,66 @@ function App() {
     setLists(newList);
   }
 
+  const onRemoveTask = (listId, taskId) => {
+    if (window.confirm('Вы действительно хотите удалить задачу?')) {
+      const newList = lists.map(item => {
+        if (item.id === listId) {
+          item.tasks = item.tasks.filter(task => task.id !== taskId);
+        }
+        return item;
+      });
+      setLists(newList);
+      axios.delete('http://localhost:3001/tasks/' + taskId)
+    }
+  };
+
+  const onCompleteTask = (listId, taskId, completed) => {
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map(task => {
+          if (task.id === taskId) {
+            task.completed = completed;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch('http://localhost:3001/tasks/' + taskId, {
+        completed
+      })
+      .catch(() => {
+        alert('Не удалось обновить задачу');
+      });
+  };
+
+  const onEditTask = (listId, taskObj) => {
+    const newTaskText = window.prompt('Текст задачи', taskObj.text);
+
+    if (!newTaskText) {
+      return;
+    }
+
+    const newList = lists.map(list => {
+      if (list.id === listId) {
+        list.tasks = list.tasks.map(task => {
+          if (task.id === taskObj.id) {
+            task.text = newTaskText;
+          }
+          return task;
+        });
+      }
+      return list;
+    });
+    setLists(newList);
+    axios
+      .patch('http://localhost:3001/tasks/' + taskObj.id, {
+        text: newTaskText
+      })
+  };
+
   const onEditListTitle = (id, title) => {
     const newList = lists.map(item => {
       if (item.id === id) {
@@ -83,15 +143,20 @@ function App() {
         )}
         <AddList onAdd={onAddList} colors={colors} />
       </div>
-      {lists && activeItem &&
+      {lists && activeItem && (
         <Tasks
           listItem={activeItem}
           onAddTask={onAddTask}
-          onEditTitle={onEditListTitle} />}
+          onEditTitle={onEditListTitle}
+          onRemoveTask={onRemoveTask}
+          onEditTask={onEditTask}
+          onCompleteTask={onCompleteTask}
+        />
+      )}
     </div>
+
   );
 }
-
 
 export default App;
 
