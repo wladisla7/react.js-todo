@@ -8,7 +8,7 @@ import deletePic from '../../assets/img/delete.png'
 
 
 
-const List = ({ items, isDeleted, onClick, onRemove }) => {
+const List = ({ items, isDeleted, onClick, onRemove, onClickItem, activeItem }) => {
     const deleteList = (item) => {
         if (window.confirm('Вы действительно хотите удалить?')) {
             axios.delete('http://localhost:3001/lists/' + item.id).then(() => {
@@ -20,7 +20,9 @@ const List = ({ items, isDeleted, onClick, onRemove }) => {
     return (
         <ul onClick={onClick} className="todoList" >
             {items.map((item, index) => (
-                <li key={index} className={classNames(item.className, { 'active': item.active })}>
+                <li key={index} className={classNames(item.className, { 
+                    active: activeItem && activeItem.id === item.id })}
+                    onClick={onClickItem ? () => onClickItem(item) : null}>
                     <div className="listpic">
                         {item.icon ? (
                             item.icon
@@ -28,7 +30,8 @@ const List = ({ items, isDeleted, onClick, onRemove }) => {
                             <Badge color={item.color.name} />
                         )}
                     </div>
-                    <span>{item.name}</span>
+                    <span>{item.name}
+                        {item.tasks && `(${item.tasks.length})`}</span>
                     {isDeleted && (
                         <img
                             src={deletePic}
