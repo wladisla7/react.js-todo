@@ -1,14 +1,13 @@
 import React from 'react'
 import axios from 'axios'
 import AddTaskForm from '../AddTaskForm'
-
-import checkpic from '../../assets/img/check.png'
+import Task from '../Task'
 import editpic from '../../assets/img/edit.png'
 
 
 import './tasks.scss'
 
-const Tasks = ({ listItem, onEditTitle, onAddTask }) => {
+const Tasks = ({ listItem, onEditTitle, onAddTask, onRemoveTask, onCompleteTask, onEditTask }) => {
 
     const editTitle = () => {
         const newTitle = window.prompt('Название списка', listItem.name);
@@ -34,18 +33,11 @@ const Tasks = ({ listItem, onEditTitle, onAddTask }) => {
 
             <div className="taskItem">
                 {!listItem.tasks.length && <h3>Задачи отсутствуют</h3>}
-                {listItem.tasks.map(task =>
-                    <div key={task.id} className="tasksItemRow">
-                        <div className="checkbox">
-                            <input id={`task-${task.id}`} type="checkbox" />
-                            <label htmlFor={`task-${task.id}`}>
-                                <img src={checkpic} alt="checkpic" className="checkpic" />
-                            </label>
-                        </div>
-                        <span className="taskText">{task.text}</span>
-                    </div>
-                )}
-                <AddTaskForm listItem={listItem} onAddTask={onAddTask} />
+                {listItem.tasks &&
+                    listItem.tasks.map(task => (
+                        <Task key={task.id} listItem={listItem} onEdit={onEditTask}  onRemove={onRemoveTask} onComplited={onCompleteTask} {...task} />
+                    ))}
+                <AddTaskForm key={listItem.id} listItem={listItem} onAddTask={onAddTask} />
             </div>
         </div>
     )
