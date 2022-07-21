@@ -1,0 +1,39 @@
+.taskForm {
+    display: flex;
+}
+
+.taskFromNew {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+
+}
+
+.taskFromNew>img {
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+
+}
+
+.newTask {
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.taskFromBlock {
+    display: flex;
+}
+
+.cancel {
+    background-color:#cee3f7,;
+}
+
+.cancel:hover {
+    background-color: darken(#cee3f7, 5%);
+}
+
+.cancel:active {
+    background-color: darken(#cee3f7, 8%);
+}

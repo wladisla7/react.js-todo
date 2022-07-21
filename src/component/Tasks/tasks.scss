@@ -2,70 +2,79 @@
     font-weight: bold;
     font-size: 32px;
     line-height: 39px;
-    color:#64d4ed;
-    margin-bottom:20px;
-    padding-bottom:20px;
-    border-bottom: 1px solid black ;
+    color: #64d4ed;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
 
-  }
-  
-  .tasksItemRow {
-    display:flex;
+}
+
+.taskItem > h3 {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    color: #c9d1d3;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+}
+
+.tasksItemRow {
+    display: flex;
     align-items: center;
-    margin-top:15px;
-  }
+    margin-top: 15px;
+}
 
-  .taskText {
-    margin-left:15px;
-  }
-  
-  
-  .checkbox{
+.taskText {
+    margin-left: 15px;
+}
+
+
+.checkbox {
 
     display: flex;
     align-items: center;
 
-    
-      
-    label{
-        display:flex;
-        align-items:center;
+
+
+    label {
+        display: flex;
+        align-items: center;
         justify-content: center;
-        border-radius:30px;
-        border:2px solid #e8e8e8;
-        width:20px;
-        height:20px;
+        border-radius: 30px;
+        border: 2px solid #e8e8e8;
+        width: 20px;
+        height: 20px;
         display: inline-block;
         cursor: pointer;
-        transition:  background-color 0.15s ease-in-out;
+        transition: background-color 0.15s ease-in-out;
     }
 
 
     .checkpic {
-        position:relative;
+        position: relative;
         opacity: 1;
-        left:5px;
+        left: 5px;
     }
 
-    input{
-        display:none;
+    input {
+        display: none;
     }
 
-    input:checked + label {
-        background-color:#4dd599;
-        border-color:#4dd599
+    input:checked+label {
+        background-color: #4dd599;
+        border-color: #4dd599
     }
 
-    &:hover{
-        label{
+    &:hover {
+        label {
             background-color: rgb(158, 215, 238);
-            border-color:#f2f2f2;
-            img{
-                opacity:1
+            border-color: #f2f2f2;
+
+            img {
+                opacity: 1
             }
         }
     }
 }
-  
-  
- 
