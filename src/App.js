@@ -9,6 +9,8 @@ import listPic from './assets/img/list.png'
 function App() {
   const [lists, setLists] = useState(null);
   const [colors, setColor] = useState(null);
+  const [activeItem, setActiveItem] = useState(null);
+
 
 
   useEffect(() => {
@@ -30,6 +32,26 @@ function App() {
     setLists(newList);
   };
 
+  const onAddTask = (listid, taskObj) => {
+    const newList = lists.map(item => {
+      if (item.id === listid) {
+        item.tasks = [...item.tasks, taskObj];
+      }
+      return item;
+    })
+    setLists(newList);
+  }
+
+  const onEditListTitle = (id, title) => {
+    const newList = lists.map(item => {
+      if (item.id === id) {
+        item.name = title;
+      }
+      return item;
+    })
+    setLists(newList);
+  }
+
   return (
     <div className="todo">
       <div className="todoSidebar">
@@ -50,6 +72,10 @@ function App() {
               const newLists = lists.filter(item => item.id !== id)
               setLists(newLists);
             }}
+            onClickItem={item => {
+              setActiveItem(item);
+            }}
+            activeItem={activeItem}
             isDeleted
           />
         ) : (
@@ -57,7 +83,11 @@ function App() {
         )}
         <AddList onAdd={onAddList} colors={colors} />
       </div>
-      {lists && <Tasks listItem={lists[1]} />}
+      {lists && activeItem &&
+        <Tasks
+          listItem={activeItem}
+          onAddTask={onAddTask}
+          onEditTitle={onEditListTitle} />}
     </div>
   );
 }
